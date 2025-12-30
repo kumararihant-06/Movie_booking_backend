@@ -1,5 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const env = require('dotenv');
+
+env.config();
 const app = express();
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 app.get('/home', (req,res) => {
     console.log("Hitting /home");
@@ -9,6 +16,6 @@ app.get('/home', (req,res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("Server started at port 3000.");
+app.listen(process.env.PORT, () => {
+    console.log(`Server started at port ${process.env.PORT}.`);
 })
